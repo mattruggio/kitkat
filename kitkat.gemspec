@@ -5,10 +5,10 @@ require './lib/kitkat/version'
 Gem::Specification.new do |s|
   s.name        = 'kitkat'
   s.version     = Kitkat::VERSION
-  s.summary     = 'Load up a SQLite file with the contents of a directory.'
+  s.summary     = 'File/Metadata Database Populator'
 
   s.description = <<-DESCRIPTION
-    Small library that can populate a SQLite database with the list of all files and sub-directories.
+    Small library that can populate a SQLite database with the recursive list of all files and their respective metadata.
   DESCRIPTION
 
   s.authors     = ['Matthew Ruggio']
@@ -17,16 +17,28 @@ Gem::Specification.new do |s|
   s.bindir      = 'exe'
   s.executables = %w[kitkat]
   s.license     = 'MIT'
+  s.homepage    = 'https://github.com/mattruggio/kitkat'
+  s.metadata    = {
+    'bug_tracker_uri' => 'https://github.com/mattruggio/kitkat/issues',
+    'changelog_uri' => 'https://github.com/mattruggio/kitkat/blob/main/CHANGELOG.md',
+    'documentation_uri' => 'https://www.rubydoc.info/gems/kitkat',
+    'homepage_uri' => s.homepage,
+    'source_code_uri' => s.homepage,
+    'rubygems_mfa_required' => 'true'
+  }
 
   s.required_ruby_version = '>= 2.6'
 
   s.add_dependency('sqlite3')
 
-  s.add_development_dependency('guard-rspec', '~>4.7')
-  s.add_development_dependency('pry', '~>0')
-  s.add_development_dependency('rake', '~> 13')
-  s.add_development_dependency('rspec', '~> 3.8')
-  s.add_development_dependency('rubocop', '~>0.90.0')
-  s.add_development_dependency('simplecov', '~>0.18.5')
-  s.add_development_dependency('simplecov-console', '~>0.7.0')
+  s.add_development_dependency('bundler-audit')
+  s.add_development_dependency('guard-rspec')
+  s.add_development_dependency('pry')
+  s.add_development_dependency('rake')
+  s.add_development_dependency('rspec')
+  s.add_development_dependency('rubocop')
+  s.add_development_dependency('rubocop-rake')
+  s.add_development_dependency('rubocop-rspec')
+  s.add_development_dependency('simplecov')
+  s.add_development_dependency('simplecov-console')
 end

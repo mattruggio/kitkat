@@ -1,6 +1,9 @@
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.6
+  Exclude:
+    - bin/*
+    - vendor/bundle/**/*
 
 Metrics/MethodLength:
   Max: 20
