@@ -27,12 +27,14 @@ bundle add kitkat
 This library ships with an executable: `exe/kitkat`.  Simply run this from your shell:
 
 ````zsh
-exe/kitkat <path> <database>
+bundle exec kitkat <path> <database>
 ````
 
-For Example: `bin/kitkat some_directory some_directory_contents.db`.  This will recursively scan the relative path at: `some_directory` and list all its contents in a SQLite database file relatively located at: `some_directory_contents.db`.
+For Example: `bundle exec kitkat some_directory some_directory_contents.db`.  This will recursively scan the relative path at: `some_directory` and list all its contents in a SQLite database file relatively located at: `some_directory_contents.db`.
 
-Note: database positional argument is optional.  If it is not supplied then it will default to: `kitkat.db`
+Notes:
+
+* The database positional argument is optional.  If it is not supplied then it will default to: `kitkat.db`
 
 ### Ruby API
 
