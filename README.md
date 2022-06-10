@@ -4,7 +4,17 @@
 
 [![Gem Version](https://badge.fury.io/rb/kitkat.svg)](https://badge.fury.io/rb/kitkat) [![Ruby Gem CI](https://github.com/mattruggio/kitkat/actions/workflows/rubygem.yml/badge.svg)](https://github.com/mattruggio/kitkat/actions/workflows/rubygem.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/7d9a8642cf5bd88a550d/maintainability)](https://codeclimate.com/github/mattruggio/kitkat/maintainability) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-I had a need to recursively enumerate a directory and load the paths, and some metadata about the files, into a SQLite file.
+I had a need to recursively enumerate a directory and load the paths, and some metadata about the files, into a SQLite file.  Currently, the following metadata is stored in the SQLite file
+
+field | description
+----- | ------------
+path | path of the file (with the root removed)
+mime_type | left-side mime type (i.e. image)
+mime_subtype | right-side mime type (i.e. jpeg)
+bytesize | size in bytes of the file.
+last_modified_at | last time the file was reported to be modified by the filesystem.
+digest | SHA256 hash of the file's contents.
+created_at | UTC date and time when the record was inserted into the DB.
 
 ## Installation
 
