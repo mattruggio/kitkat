@@ -2,7 +2,7 @@
 
 #### File/Metadata Database Populator
 
-[![Gem Version](https://badge.fury.io/rb/kitkat.svg)](https://badge.fury.io/rb/kitkat) [![Ruby Gem CI](https://github.com/mattruggio/kitkat/actions/workflows/rubygem.yml/badge.svg)](https://github.com/mattruggio/kitkat/actions/workflows/rubygem.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Gem Version](https://badge.fury.io/rb/kitkat.svg)](https://badge.fury.io/rb/kitkat) [![Ruby Gem CI](https://github.com/mattruggio/kitkat/actions/workflows/rubygem.yml/badge.svg)](https://github.com/mattruggio/kitkat/actions/workflows/rubygem.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/7d9a8642cf5bd88a550d/maintainability)](https://codeclimate.com/github/mattruggio/kitkat/maintainability) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 I had a need to recursively enumerate a directory and load the paths, and some metadata about the files, into a SQLite file.
 
