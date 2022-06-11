@@ -20,7 +20,7 @@ describe Kitkat::Reader do
     it 'recursively lists all files' do
       actual_relative_paths = reader.map(&:relative_path)
 
-      expect(actual_relative_paths).to match(relative_paths)
+      expect(actual_relative_paths).to match_array(relative_paths)
     end
   end
 end

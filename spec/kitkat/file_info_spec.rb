@@ -42,8 +42,11 @@ describe Kitkat::FileInfo do
       expect(file_info.bytesize).to eq(14)
     end
 
+    # This one is a bit harder to make deterministic since the file system can produce different
+    # results.  I suppose we could mock File in order to ensure our FileInfo class is as
+    # deterministic as possible (this might be the best option for expanding the test suite here.)
     specify '#last_modified_at returns the last date the file was modified' do
-      expect(file_info.last_modified_at).to eq(Time.parse('2022-06-10 19:27:59.646755467 UTC'))
+      expect(file_info.last_modified_at).to eq(File.mtime(file_info.path))
     end
   end
 end
