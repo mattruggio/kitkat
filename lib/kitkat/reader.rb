@@ -5,6 +5,8 @@ require_relative 'file_info'
 module Kitkat
   # Directory operations.
   class Reader
+    include Enumerable
+
     attr_reader :root
 
     def initialize(root)

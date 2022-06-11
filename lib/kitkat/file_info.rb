@@ -32,6 +32,7 @@ module Kitkat
       full_mime_type.split(MIME_TYPE_SEPARATOR).last
     end
 
+    # Important note: Calling this on a directory will result in a blank string.
     def digest
       File.directory?(path) ? BLANK : Digest::SHA256.file(path).hexdigest
     end

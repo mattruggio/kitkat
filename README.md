@@ -34,7 +34,7 @@ bundle add kitkat
 
 ### Executable
 
-This library ships with an executable: `exe/kitkat`.  Simply run this from your shell:
+This library ships with an executable: `kitkat`.  Simply run this from your shell:
 
 ````zsh
 bundle exec kitkat <path> <database>
