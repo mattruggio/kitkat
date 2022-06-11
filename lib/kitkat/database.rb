@@ -4,6 +4,8 @@ module Kitkat
   # Database-level operations.
   class Database
     def initialize(path)
+      ensure_dir_exists(path)
+
       @connection = SQLite3::Database.new(path)
 
       load_schema
@@ -29,6 +31,12 @@ module Kitkat
     private
 
     attr_reader :connection
+
+    def ensure_dir_exists(path)
+      dir = File.dirname(path)
+
+      FileUtils.mkdir_p(dir) unless File.exist?(dir)
+    end
 
     def sql_statement
       'INSERT OR IGNORE INTO files VALUES (?, ?, ?, ?, ?, ?, ?)'
