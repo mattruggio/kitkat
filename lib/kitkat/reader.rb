@@ -15,21 +15,21 @@ module Kitkat
       freeze
     end
 
-    def each(&block)
+    def each(&)
       return enum_for(:each) unless block_given?
 
-      traverse(root, &block)
+      traverse(root, &)
 
       self
     end
 
     private
 
-    def traverse(dir, &block)
+    def traverse(dir, &)
       Dir[File.join(dir, '*')].each do |path|
-        yield FileInfo.new(path, root: root)
+        yield FileInfo.new(path, root:)
 
-        traverse(path, &block) if File.directory?(path)
+        traverse(path, &) if File.directory?(path)
       end
     end
   end

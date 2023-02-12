@@ -10,7 +10,7 @@ describe Kitkat do
 
   describe '#crawl' do
     before do
-      described_class.crawl(db: db, path: path, io: io)
+      described_class.crawl(db:, path:, io:)
     end
 
     after do
