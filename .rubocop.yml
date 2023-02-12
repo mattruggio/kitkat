@@ -4,10 +4,13 @@ require:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.2
   Exclude:
     - bin/*
     - vendor/bundle/**/*
+
+Gemspec/DevelopmentDependencies:
+  EnforcedStyle: gemspec
 
 Metrics/MethodLength:
   Max: 20

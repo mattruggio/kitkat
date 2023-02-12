@@ -7,4 +7,4 @@ require 'kitkat'
 path = ARGV[0].to_s
 db   = ARGV[1].to_s.empty? ? 'kitkat.db' : ARGV[1].to_s
 
-Kitkat.crawl(db: db, path: path)
+Kitkat.crawl(db:, path:)

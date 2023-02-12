@@ -35,7 +35,7 @@ module Kitkat
     def ensure_dir_exists(path)
       dir = File.dirname(path)
 
-      FileUtils.mkdir_p(dir) unless File.exist?(dir)
+      FileUtils.mkdir_p(dir)
     end
 
     def sql_statement

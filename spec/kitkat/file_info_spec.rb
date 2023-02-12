@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Kitkat::FileInfo do
-  subject(:file_info) { described_class.new(path, root: root) }
+  subject(:file_info) { described_class.new(path, root:) }
 
   context 'when path is for a simple text file' do
     let(:root)     { fixture('example_dir') }
