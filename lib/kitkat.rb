@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# typed: strict
 
 require 'digest'
 require 'sorbet-runtime'
@@ -10,6 +11,9 @@ require_relative 'kitkat/reader'
 # Main example/easiest entry-point for this application.
 module Kitkat
   class << self
+    extend T::Sig
+
+    sig { params(path: String, db: String, io: IO).void }
     def crawl(path:, db:, io: $stdout)
       reader = Reader.new(path)
       db     = Database.new(db)

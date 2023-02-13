@@ -94,7 +94,7 @@ Auditing the dependencies:
 bin/bundler-audit check --update
 ````
 
-Sorbet type-checking:
+Don't forget to run Sorbet for static type checking:
 
 ````zsh
 ./bin/srb tc
