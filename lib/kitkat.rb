@@ -13,7 +13,7 @@ module Kitkat
   class << self
     extend T::Sig
 
-    sig { params(path: String, db: String, io: IO).void }
+    sig { params(path: String, db: String, io: T.any(IO, StringIO)).void }
     def crawl(path:, db:, io: $stdout)
       reader = Reader.new(path)
       db     = Database.new(db)
