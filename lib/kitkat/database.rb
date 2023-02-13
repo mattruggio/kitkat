@@ -1,18 +1,23 @@
 # frozen_string_literal: true
+# typed: strict
 
 module Kitkat
   # Database-level operations.
   class Database
+    extend T::Sig
+
+    sig { params(path: T.untyped).void }
     def initialize(path)
       ensure_dir_exists(path)
 
-      @connection = SQLite3::Database.new(path)
+      @connection = T.let(SQLite3::Database.new(path), SQLite3::Database)
 
       load_schema
 
       freeze
     end
 
+    sig { params(file_info: Kitkat::FileInfo).returns(Kitkat::Database) }
     def insert(file_info)
       connection.execute(
         sql_statement,
@@ -30,18 +35,22 @@ module Kitkat
 
     private
 
+    sig { returns(SQLite3::Database) }
     attr_reader :connection
 
+    sig { params(path: T.any(String, Pathname)).returns(T::Array[String]) }
     def ensure_dir_exists(path)
       dir = File.dirname(path)
 
       FileUtils.mkdir_p(dir)
     end
 
+    sig { returns(String) }
     def sql_statement
       'INSERT OR IGNORE INTO files VALUES (?, ?, ?, ?, ?, ?, ?)'
     end
 
+    sig { void }
     def load_schema
       connection.execute <<-SQL
         CREATE TABLE IF NOT EXISTS files (

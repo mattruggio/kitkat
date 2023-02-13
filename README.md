@@ -88,10 +88,16 @@ Also, do not forget to run Rubocop:
 bin/rubocop
 ````
 
-And auditing the dependencies:
+Auditing the dependencies:
 
 ````zsh
 bin/bundler-audit check --update
+````
+
+Don't forget to run Sorbet for static type checking:
+
+````zsh
+./bin/srb tc
 ````
 
 ### Publishing
