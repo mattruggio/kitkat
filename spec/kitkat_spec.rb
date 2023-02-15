@@ -20,16 +20,18 @@ describe Kitkat do
     # A superficial count test.
     it 'inserted a file record for each file and folder found in path' do
       connection.execute('SELECT COUNT(*) FROM files') do |row|
-        expect(row.first).to eq(4)
+        expect(row.first).to eq(6)
       end
     end
 
     it 'writes each relative_path found in path to io' do
       relative_paths = [
         "hello_world\n",
+        "hello_world/earth.jpg\n",
         "hello_world/hello_world.txt\n",
         "hello_world.txt\n",
-        "hello_world2.txt\n"
+        "hello_world2.txt\n",
+        "jupiter.jpg\n"
       ]
 
       relative_paths.each do |relative_path|
