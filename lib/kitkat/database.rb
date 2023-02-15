@@ -14,6 +14,17 @@ module Kitkat
     end
 
     def insert(file_info)
+      insert_file(file_info)
+      insert_content(file_info) if file_info.storable?
+
+      self
+    end
+
+    private
+
+    attr_reader :connection
+
+    def insert_file(file_info)
       connection.execute(
         files_sql_statement,
         file_info.relative_path,
@@ -24,22 +35,16 @@ module Kitkat
         file_info.digest,
         Time.now.utc.to_s
       )
-
-      if file_info.storable?
-        connection.execute(
-          contents_sql_statement,
-          file_info.digest,
-          file_info.contents,
-          Time.now.utc.to_s
-        )
-      end
-
-      self
     end
 
-    private
-
-    attr_reader :connection
+    def insert_content(file_info)
+      connection.execute(
+        contents_sql_statement,
+        file_info.digest,
+        file_info.contents,
+        Time.now.utc.to_s
+      )
+    end
 
     def ensure_dir_exists(path)
       dir = File.dirname(path)
@@ -56,6 +61,11 @@ module Kitkat
     end
 
     def load_schema
+      load_files_schema
+      load_contents_schema
+    end
+
+    def load_files_schema
       connection.execute <<-SQL
         CREATE TABLE IF NOT EXISTS files (
           path varchar NOT NULL,
@@ -71,7 +81,9 @@ module Kitkat
       connection.execute <<-SQL
         CREATE UNIQUE INDEX IF NOT EXISTS idx_files_path ON files (path);
       SQL
+    end
 
+    def load_contents_schema
       connection.execute <<-SQL
         CREATE TABLE IF NOT EXISTS contents (
           digest varchar NOT NULL,

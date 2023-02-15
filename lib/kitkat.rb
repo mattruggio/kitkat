@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'digest'
-require 'set'
 require 'sqlite3'
 
 require_relative 'kitkat/database'

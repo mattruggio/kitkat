@@ -61,7 +61,7 @@ module Kitkat
     end
 
     def read_contents
-      IO.binread(path) if storable?
+      File.binread(path) if storable?
     end
   end
 end
