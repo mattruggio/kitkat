@@ -15,7 +15,7 @@ module Kitkat
 
     def insert(file_info)
       connection.execute(
-        sql_statement,
+        files_sql_statement,
         file_info.relative_path,
         file_info.mime_type,
         file_info.mime_subtype,
@@ -24,6 +24,15 @@ module Kitkat
         file_info.digest,
         Time.now.utc.to_s
       )
+
+      if file_info.storable?
+        connection.execute(
+          contents_sql_statement,
+          file_info.digest,
+          file_info.contents,
+          Time.now.utc.to_s
+        )
+      end
 
       self
     end
@@ -38,8 +47,12 @@ module Kitkat
       FileUtils.mkdir_p(dir)
     end
 
-    def sql_statement
+    def files_sql_statement
       'INSERT OR IGNORE INTO files VALUES (?, ?, ?, ?, ?, ?, ?)'
+    end
+
+    def contents_sql_statement
+      'INSERT OR IGNORE INTO contents VALUES (?, ?, ?)'
     end
 
     def load_schema
@@ -57,6 +70,18 @@ module Kitkat
 
       connection.execute <<-SQL
         CREATE UNIQUE INDEX IF NOT EXISTS idx_files_path ON files (path);
+      SQL
+
+      connection.execute <<-SQL
+        CREATE TABLE IF NOT EXISTS contents (
+          digest varchar NOT NULL,
+          data blob,
+          created_at datetime NOT NULL
+        );
+      SQL
+
+      connection.execute <<-SQL
+        CREATE UNIQUE INDEX IF NOT EXISTS idx_contents_digest ON contents (digest);
       SQL
     end
   end

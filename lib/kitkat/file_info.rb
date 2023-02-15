@@ -5,6 +5,7 @@ module Kitkat
   class FileInfo
     BLANK               = ''
     MIME_TYPE_SEPARATOR = '/'
+    STORABLE_MIME_TYPES = %w[image text].to_set.freeze
 
     attr_reader :path, :root
 
@@ -34,7 +35,7 @@ module Kitkat
 
     # Important note: Calling this on a directory will result in a blank string.
     def digest
-      File.directory?(path) ? BLANK : Digest::SHA256.file(path).hexdigest
+      @digest ||= read_digest
     end
 
     def last_modified_at
@@ -42,7 +43,25 @@ module Kitkat
     end
 
     def bytesize
-      File.size(path)
+      @bytesize ||= File.size(path)
+    end
+
+    def contents
+      @contents ||= read_contents
+    end
+
+    def storable?
+      STORABLE_MIME_TYPES.include?(mime_type)
+    end
+
+    private
+
+    def read_digest
+      File.directory?(path) ? BLANK : Digest::SHA256.file(path).hexdigest
+    end
+
+    def read_contents
+      IO.binread(path) if storable?
     end
   end
 end

@@ -10,9 +10,11 @@ describe Kitkat::Reader do
   let(:relative_paths) do
     %w[
       hello_world
+      hello_world/earth.jpg
       hello_world/hello_world.txt
       hello_world.txt
       hello_world2.txt
+      jupiter.jpg
     ]
   end
 
